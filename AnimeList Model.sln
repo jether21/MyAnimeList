@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeModel", "AnimeList\AnimeModel.csproj", "{AF3326CB-B660-434E-9E8B-052E65A11004}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeModel", "AnimeList\AnimeModel.csproj", "{AF3326CB-B660-434E-9E8B-052E65A11004}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeBL", "AnimeBL\AnimeBL.csproj", "{FF39A755-BBC2-457B-B380-D2A4CB432A8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeBL", "AnimeBL\AnimeBL.csproj", "{FF39A755-BBC2-457B-B380-D2A4CB432A8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeData", "AnimeData\AnimeData.csproj", "{AAA46B98-4CCF-4664-ACEF-6B69D276CAD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeData", "AnimeData\AnimeData.csproj", "{AAA46B98-4CCF-4664-ACEF-6B69D276CAD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimeUserInt", "AnimeUserInt\AnimeUserInt.csproj", "{F0EC63FD-65D4-4392-9F8F-91D71A85DB84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimeUserInt", "AnimeUserInt\AnimeUserInt.csproj", "{F0EC63FD-65D4-4392-9F8F-91D71A85DB84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AniAPi", "AniAPi\AniAPi.csproj", "{834D502F-61AE-40E8-AE59-E0BB8AB06749}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F0EC63FD-65D4-4392-9F8F-91D71A85DB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0EC63FD-65D4-4392-9F8F-91D71A85DB84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0EC63FD-65D4-4392-9F8F-91D71A85DB84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{834D502F-61AE-40E8-AE59-E0BB8AB06749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{834D502F-61AE-40E8-AE59-E0BB8AB06749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{834D502F-61AE-40E8-AE59-E0BB8AB06749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{834D502F-61AE-40E8-AE59-E0BB8AB06749}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

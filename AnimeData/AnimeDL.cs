@@ -1,41 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AnimeModel;
 
 namespace AnimeData
 {
     public class AnimeDL
     {
-        List<User> users;
+        List<AnimeAlbum> users;
+        SqlData sqlData; 
 
         public AnimeDL()
         {
-            users = new List<User>();
-            AnimeList _userFactory = new UserFactory();
-            users = _userFactory.GetDummyUsers();
+            users = new List<AnimeAlbum>();
+            sqlData = new SqlData();
+
         }
 
-        public List<User> GetUsers()
+        public List<AnimeAlbum> GetUsers()
         {
+            users = sqlData.GetUsers();
             return users;
         }
 
-        public void AddUser(User user)
+        public int AddUser(AnimeAlbum user)
         {
-            users.Add(user);
+            return sqlData.AddUser(user.name, user.anime, user.status);
         }
 
-        public void UpdateUser(User user)
+        public int UpdateUser(AnimeAlbum user)
         {
-            for (int i = 0; i < users.Count; i++)
-            {
-                if (users[i].name == user.name)
-                {
-                    users[i].anime = user.anime;
-                    users[i].profile = user.profile;
-                    users[i].dateUpdated = DateTime.Now;
-                }
-            }
+            return sqlData.UpdateUser(user.name, user.anime);
+        }
+
+        public int DeleteUser(AnimeAlbum user)
+        {
+            return sqlData.DeleteUser(user.name);
         }
     }
 }

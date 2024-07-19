@@ -1,0 +1,6 @@
+@AniAPi_HostAddress = http://localhost:5184
+
+GET {{AniAPi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

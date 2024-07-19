@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using AnimeData; 
+using AnimeData;
 using AnimeModel;
 
 namespace AnimeUserInt
@@ -9,7 +9,9 @@ namespace AnimeUserInt
     {
         static void Main(string[] args)
         {
+            SqlData sqlData = new SqlData();
             bool active = true;
+
             while (active)
             {
                 Console.WriteLine("MyAniList");
@@ -23,20 +25,25 @@ namespace AnimeUserInt
 
                 if (number == "1")
                 {
-                    Console.WriteLine("Anime name");
+                    Console.WriteLine("Anime name:");
                     string name = Console.ReadLine();
 
-                    Console.WriteLine("Anime Review");
+                    Console.WriteLine("Anime Review:");
                     string anime = Console.ReadLine();
-                    SqlData.AddUser(name, anime);
+
+                    Console.WriteLine("Anime Status:");
+                    string status = Console.ReadLine();
+
+                    sqlData.AddUser(name, anime, status);
 
                     Console.WriteLine("Thank you for reviewing");
                 }
                 else if (number == "2")
                 {
-                    Console.WriteLine("Input your Name");
+                    Console.WriteLine("Input your Name:");
                     string name = Console.ReadLine();
-                    SqlData.DeleteUser(name);
+
+                    sqlData.DeleteUser(name);
 
                     Console.WriteLine("Thank you again!");
                 }
@@ -44,7 +51,7 @@ namespace AnimeUserInt
                 {
                     Console.WriteLine("Here's the list");
                     Console.WriteLine("");
-                    GetUsers();
+                    GetUsers(sqlData);
                 }
                 else
                 {
@@ -52,17 +59,18 @@ namespace AnimeUserInt
                 }
             }
 
-            Console.ReadKey(); 
+            Console.ReadKey();
         }
 
-        public static void GetUsers()
+        public static void GetUsers(SqlData sqlData)
         {
-            List<User> usersFromDB = SqlData.GetUsers();
+            List<AnimeAlbum> usersFromDB = sqlData.GetUsers();
 
             foreach (var item in usersFromDB)
             {
                 Console.WriteLine("Name: " + item.name);
                 Console.WriteLine("Anime: " + item.anime);
+                Console.WriteLine("Status: " + item.status);
                 Console.WriteLine("---------------------");
             }
         }

@@ -1,27 +1,19 @@
-﻿using AnimeBL;
-
-namespace AnimeBL
+﻿namespace AnimeBL
 {
     public class AnimeValid
     {
-        AniGateway getservices = new AniGateway();
+         AniGateway getservices = new AniGateway();
 
-        public bool AnimeValid(string Username)
+        public bool CheckIfNameExists(string name)
         {
-            bool result = new AniGateway();
-        }
-
-        public bool CheckIfUserNameExists(string username)
-        {
-            bool result = getservices.GetUser(username) != null;
+            bool result = getservices.GetUser(name) != null;
             return result;
         }
 
-        public bool CheckIfUserExists(string username, string password)
+        public bool CheckIfUserExists(string name, string anime)
         {
-            bool result = getservices.GetUser(username, password) != null;
+            bool result = getservices.GetUser(name, anime) != null;
             return result;
         }
-
     }
 }

@@ -1,8 +1,8 @@
-﻿namespace AnimeModel
+namespace AniAPi
 {
-    public class AnimeAlbum
+    public class Users_
     {
-        public string name { get; set; }
+        public string name { get; set; } 
         public string anime { get; set; }
         public string status { get; set; }
     }

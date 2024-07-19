@@ -1,38 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using AnimeModel;
 
 namespace AnimeData
 {
-    internal class SqlData
+    public class SqlData
     {
-        private static string connectionString = "Data Source=JETHER\\SQLEXPRESS;Initial Catalog=JethersAniLib;Integrated Security=True;";
-        private static SqlConnection sqlConnection = new SqlConnection(connectionString);
+        static string connectionString = "Server = tcp:20.2.250.60,1433; Database = aniList; User Id = sa; Password = bsit2!";
+        SqlConnection sqlConnection;
 
-        public static void Connect()
+        public SqlData()
+        {
+            sqlConnection = new SqlConnection(connectionString);
+        }
+
+        public void Connect()
         {
             sqlConnection.Open();
         }
 
-        public static List<User> GetUsers()
+        public List<AnimeAlbum> GetUsers()
         {
             string selectStatement = "SELECT name, anime FROM users";
-
             SqlCommand selectCommand = new SqlCommand(selectStatement, sqlConnection);
             sqlConnection.Open();
             SqlDataReader reader = selectCommand.ExecuteReader();
 
-            List<User> users = new List<User>();
+            List<AnimeAlbum> users = new List<AnimeAlbum>();
 
             while (reader.Read())
             {
                 string name = reader["name"].ToString();
                 string anime = reader["anime"].ToString();
+                string status = reader["status"].ToString();
 
-                User readUser = new User();
+                AnimeAlbum readUser = new AnimeAlbum();
                 readUser.name = name;
                 readUser.anime = anime;
+                readUser.status = status;
 
                 users.Add(readUser);
             }
@@ -43,16 +48,16 @@ namespace AnimeData
             return users;
         }
 
-        public static int AddUser(string name, string anime)
+        public int AddUser(string name, string anime, string status)
         {
             int success;
 
-            string insertStatement = "INSERT INTO users (name, anime) VALUES (@name, @anime)";
-
+            string insertStatement = "INSERT INTO users VALUES (@name,@anime,@status)";
             SqlCommand insertCommand = new SqlCommand(insertStatement, sqlConnection);
 
             insertCommand.Parameters.AddWithValue("@name", name);
             insertCommand.Parameters.AddWithValue("@anime", anime);
+            insertCommand.Parameters.AddWithValue("@status", status);
             sqlConnection.Open();
 
             success = insertCommand.ExecuteNonQuery();
@@ -62,31 +67,36 @@ namespace AnimeData
             return success;
         }
 
-        public static void UpdateUser(string name, string anime)
+        public int UpdateUser(string name, string anime)
         {
-            var updateStatement = "UPDATE users SET anime = @anime WHERE name = @name";
+            int success;
+            string updateStatement = "UPDATE users SET anime = @anime WHERE name = @name";
             SqlCommand updateCommand = new SqlCommand(updateStatement, sqlConnection);
             sqlConnection.Open();
 
             updateCommand.Parameters.AddWithValue("@name", name);
             updateCommand.Parameters.AddWithValue("@anime", anime);
-
-            updateCommand.ExecuteNonQuery();
+            
+           success = updateCommand.ExecuteNonQuery(); 
 
             sqlConnection.Close();
+            return success;
         }
 
-        public static void DeleteUser(string name)
+        public int DeleteUser(string name)
         {
+            int success;
             string deleteStatement = "DELETE FROM users WHERE name = @name";
             SqlCommand deleteCommand = new SqlCommand(deleteStatement, sqlConnection);
             sqlConnection.Open();
 
             deleteCommand.Parameters.AddWithValue("@name", name);
 
-            deleteCommand.ExecuteNonQuery();
+            success = deleteCommand.ExecuteNonQuery();
 
             sqlConnection.Close();
+
+            return success;
         }
     }
 }

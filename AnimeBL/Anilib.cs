@@ -1,32 +1,63 @@
 ﻿using AnimeData;
 using AnimeModel;
+using System.Collections.Generic;
 
 namespace AnimeBL
 {
     public class Anilib
     {
-         AnimeValid validationServices = new AnimeValid();
-         UserData userData = new UserData();
+         AnimeValid _validationServices;
+         AnimeDL _userData;
 
-        public bool CreateUser(User user)
+        public bool CreateUser(AnimeAlbum users)
         {
-            bool result = validationServices.CheckIfUserNameExists(user.name);
+            bool result = false;
 
-            if (!result)
+            if (_validationServices.CheckIfUserExists(users.name,users.anime))
             {
-                userData.AddUser(user);
+                result = _userData.AddUser(users) > 0;
             }
-
-            return !result;
+            return result;
         }
 
-        public bool UpdateUser(User user)
-        {
-            bool result = validationServices.CheckIfUserNameExists(user.name);
+      
 
-            if (result)
+        public bool CreateUser(string name, string anime, string status)
+        {
+            bool result = false;
+            AnimeAlbum users = new AnimeAlbum {name = name, anime = anime, status = status};
+          
+
+            return CreateUser(users);
+        }
+
+        public bool UpdateUser(AnimeAlbum user)
+        {
+            bool result = false;
+
+            if (_validationServices.CheckIfUserExists(user.name, user.anime)) 
             {
-                userData.UpdateUser(user);
+                result = _userData.UpdateUser(user) > 0;
+            }
+
+            return result;
+        }
+
+        public bool UpdateUser(string name, string anime, string status)
+        {
+            AnimeAlbum user = new AnimeAlbum { anime = anime, status = status };
+            return UpdateUser(user);
+        }
+
+      
+
+        public bool DeleteUser(AnimeAlbum user)
+        {
+            bool result = false;
+
+            if (_validationServices.CheckIfUserExists(user.name, user.anime))
+            {
+                result = _userData.DeleteUser(user) > 0;
             }
 
             return result;

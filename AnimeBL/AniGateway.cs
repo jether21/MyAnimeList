@@ -1,63 +1,42 @@
-﻿
-using AnimeData;
+﻿using AnimeData;
+using AnimeModel;
 using System.Collections.Generic;
 
 namespace AnimeBL
 {
     public class AniGateway
     {
-        private List<User> GetAllUsers()
+        public List<AnimeAlbum> GetAllUsers()
         {
-            UserData userData = new UserData();
-
-            return userData.GetUsers();
-
+            AnimeDL AnimeData = new AnimeDL();
+            return AnimeData.GetUsers();
         }
 
-        public List<User> GetUsersByStatus(int userStatus)
-        {
-            List<User> usersByStatus = new List<User>();
 
+        public AnimeAlbum GetUser(string name, string anime)
+        {
             foreach (var user in GetAllUsers())
             {
-                if (user.status == userStatus)
+                if (user.name == name && user.anime == anime)
                 {
-                    usersByStatus.Add(user);
+                    return user;
                 }
             }
 
-            return usersByStatus;
+            return null;
         }
 
-        public User GetUser(string username, string Amine)
+        public AnimeAlbum GetUser(string name)
         {
-            User foundUser = new User();
-
             foreach (var user in GetAllUsers())
             {
-                if (user.name == username && user.Amine == Amine)
+                if (user.name == name)
                 {
-                    foundUser = user;
+                    return user;
                 }
             }
 
-            return foundUser;
-        }
-
-        public User GetUser(string username)
-        {
-            User foundUser = new User();
-
-            foreach (var user in GetAllUsers())
-            {
-                if (user.name == username)
-                {
-                    foundUser = user;
-                }
-            }
-
-            return foundUser;
+            return null;
         }
     }
 }
-
